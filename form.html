@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="form.css">
+        <title> Form </title>
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+        <!-- Bootstrap 4 Links -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
+
+        <script src="https://unpkg.com/babel-standalone/babel.min.js"></script>
+        <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+        <script src="https://unpkg.com/vue-material@beta"></script>
+    </head>
+    <body>
+        <section class="content">
+            <div class="container">
+                <h1 style="font-size: 45px; color: #fff; text-align: left;">You Will Be Aware Of Any News</h1>
+                <form action="#">
+                    <div class="user-details">
+                        <div class="input-box">
+                            <span class="details"> 
+                                Name
+                            </span>
+                            <input type="text" placeholder="Enter your name" id="name">
+                        </div>
+    
+                        <div class="input-box">
+                            <span class="details"> 
+                                Surname
+                            </span>
+                            <input type="text" placeholder="Enter your surname" id="surname">
+                        </div>
+    
+                        <div class="input-box">
+                            <span class="details"> 
+                                Email
+                            </span>
+                            <input type="text" placeholder="Enter your email adress" id="email">
+                        </div>
+    
+                        <div class="input-box">
+                            <span class="details"> 
+                                Phone Number
+                            </span>
+                            <input type="text" placeholder="Enter your phone number" id="number">
+                        </div>
+    
+                        <div class="input-box">
+                            <span class="details"> 
+                                Password
+                            </span>
+                            <input type="password" placeholder="Confirm your password" id="password" minlength="4"
+                            maxlength="8" size="8">
+                        </div>
+    
+                        <div class="input-box">
+                            <span class="details"> 
+                                Confirm Password
+                            </span>
+                            <input type="password" placeholder="Confirm your password" id="password" minlength="4"
+                            maxlength="8" size="8">
+                        </div>
+                    </div>
+                    <div class="gender-details" style="margin-top: 6%">
+                        <input type="radio" name="gender" id="first">
+                        <input type="radio" name="gender" id="second">
+                        <input type="radio" name="gender" id="third">
+                        <span class="gender-title"> Gender </span>
+                        <div class="category">
+                            <label for="first">
+                                <span class="dot one"></span>
+                                <span class="gender">
+                                    Male
+                                </span>
+                            </label>
+                            <label for="second">
+                                <span class="dot two"></span>
+                                <span class="gender">
+                                    Female
+                                </span>
+                            </label>
+                            <label for="third">
+                                <span class="dot three"></span>
+                                <span class="gender">
+                                    Prefer not to say 
+                                </span>
+                            </label>
+                        </div>
+                        <span class="gender-title"> Your comments </span>
+                    </div>
+                    <div class="textareaRegister">
+                        <textarea id="textR" cols="53" rows="auto"></textarea>
+                    </div>
+                    <div id="app">
+                        <button class="hero-btn btn-outline-success" @click="download" style="font-size: 2.5vw;">Register</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </body>
+    <script>
+        Vue.use(VueMaterial.default)
+
+        var example = {
+            methods:{
+                download: function(){
+                    let name = document.getElementById("name");
+                    let surname = document.getElementById("surname");
+                    let email = document.getElementById("email");
+                    let number = document.getElementById("number");
+                    let password = document.getElementById("password");
+                    let text = document.getElementById("textR");
+
+                    let data = "Registered person information " + "\n" +  
+                    "\nName: " + name.value + "\n " + 
+                    "\nSurname: " + surname.value + "\n" +
+                    "\nEmail: " + email.value + "\n " + 
+                    "\nPhone Number: " + number.value + "\n " +
+                    "\nPassword: " + password.value + "\n" +
+                    "\nComments: " + text.value;
+
+
+                    var blob = new Blob([ data ], { "type" : "text/plain" });
+                    let link = document.createElement('a')
+                    link.href = window.URL.createObjectURL(blob)
+                    link.download = 'information.txt'
+                    link.click()
+                }
+            }
+        }
+
+        var app = new Vue(example)
+
+        app.$mount("#app");
+    </script>
+</html>
